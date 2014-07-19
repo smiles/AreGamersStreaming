@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace MVVMvideo
+namespace Smiles.MvvM.Lib
 {
     public class CommonBase : INotifyPropertyChanged 
     {
