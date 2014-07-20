@@ -53,7 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\IUserPref.cs" />
     <Compile Include="ViewModel\AGS_UserControl.cs" />
+    <Compile Include="ViewModel\DelegateCast.cs" />
     <Compile Include="View\StartControl.xaml.cs">
       <DependentUpon>StartControl.xaml</DependentUpon>
     </Compile>

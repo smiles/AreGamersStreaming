@@ -7,11 +7,11 @@ namespace AreGamersStreaming.ViewModel
 {
     using Smiles.MvvM.Lib;
     using Properties;
+    using AreGamersStreaming.Model;
 
     public class AGS_UserControl : CommonBase
     {
-        private bool _IsStartBoot = Settings.Default.Bootatstartup;
-        private bool _IsMinStart = Settings.Default.Minamizeatstart;
+        private IUserPref _Preference = new UserPref();
 
         public string AddStream
         {
@@ -27,14 +27,12 @@ namespace AreGamersStreaming.ViewModel
 
         public bool IsStartBoot
         {
-            get { return _IsStartBoot; }
+            get { return _Preference.IsStartAtBoot; }
             set
             {
-                if(_IsStartBoot != value)
+                if (_Preference.IsStartAtBoot != value)
                 {
-                    _IsStartBoot = value;
-                    Settings.Default.Bootatstartup = value;
-                    Settings.Default.Save();
+                    _Preference.IsStartAtBoot = value;
                     RaisePropertyChanged("IsStartBoot");
                 }
             }
@@ -42,14 +40,12 @@ namespace AreGamersStreaming.ViewModel
 
         public bool IsMinStart
         {
-            get {return _IsMinStart; }
+            get {return _Preference.IsMinamizeAtStart; }
             set
             {
-                if(_IsMinStart != value)
+                if(_Preference.IsMinamizeAtStart != value)
                 {
-                    _IsMinStart = value;
-                    Settings.Default.Minamizeatstart = value;
-                    Settings.Default.Save();
+                    _Preference.IsMinamizeAtStart = value;
                     RaisePropertyChanged("IsMinStart");
                 }
             }

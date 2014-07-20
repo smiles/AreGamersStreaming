@@ -46,5 +46,16 @@ namespace AreGamersStreaming.Properties {
                 this["Minamizeatstart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection StreamList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["StreamList"]));
+            }
+            set {
+                this["StreamList"] = value;
+            }
+        }
     }
 }
