@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AreGamersStreaming.Model
 {
-    interface IUserPref
+    interface ITwitchPref
     {
-        bool IsStartAtBoot
+        string TwitchAPI
         {
             get;
             set;
         }
 
-        bool IsMinamizeAtStart
+        string TwitchAPIStream
         {
             get;
             set;
         }
 
-        List<string> UserStreamList
+        string TwitchHeaderv2
         {
             get;
             set;
         }
 
-        int HowOftenToCheck
+        string TwitchHeaderv3
         {
             get;
             set;

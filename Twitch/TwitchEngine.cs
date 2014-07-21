@@ -5,7 +5,8 @@ using System.Text;
 
 namespace AreGamersStreaming.Twitch
 {
-    class TwitchEngine
+    using Smiles.Common.Http;
+    public class TwitchEngine
     {
     }
 }

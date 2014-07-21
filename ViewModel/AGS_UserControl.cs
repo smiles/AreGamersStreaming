@@ -13,17 +13,8 @@ namespace AreGamersStreaming.ViewModel
     {
         private IUserPref _Preference = new UserPref();
 
-        public string AddStream
-        {
-            get;
-            set;
-        }
+        
 
-        public string DelStream
-        {
-            get;
-            set;
-        }
 
         public bool IsStartBoot
         {

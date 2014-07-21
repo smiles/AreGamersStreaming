@@ -11,5 +11,20 @@
     <Setting Name="StreamList" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="HowOftenToCheck" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="TwitchAPI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.twitch.tv/kraken/</Value>
+    </Setting>
+    <Setting Name="TwitchJSONHeaderv3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Accept: application/vnd.twitchtv.v3+json</Value>
+    </Setting>
+    <Setting Name="TwitchJSONHeaderv2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Accept: application/vnd.twitchtv.v2+json</Value>
+    </Setting>
+    <Setting Name="TwitchAPIStream" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.twitch.tv/kraken/streams/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -10,8 +10,15 @@ namespace AreGamersStreaming.Model
 
     public class UserPref : IUserPref
     {
+        #region Private Variables
+
         private bool _IsStartAtBoot = Settings.Default.Bootatstartup;
         private bool _IsMinamizedAtStart = Settings.Default.Minamizeatstart;
+        private int _HowOftenToCheck = Settings.Default.HowOftenToCheck;
+
+        #endregion
+
+        #region Properties
 
         public bool IsStartAtBoot
         {
@@ -46,5 +53,21 @@ namespace AreGamersStreaming.Model
             get;
             set;
         }
+
+        public int HowOftenToCheck
+        {
+            get { return _HowOftenToCheck; }
+            set
+            {
+                if(_HowOftenToCheck != value)
+                {
+                    _HowOftenToCheck = value;
+                    Settings.Default.HowOftenToCheck = value;
+                    Settings.Default.Save();
+                }
+            }
+        }
+
+        #endregion
     }
 }

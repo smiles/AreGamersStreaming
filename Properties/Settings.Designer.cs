@@ -57,5 +57,65 @@ namespace AreGamersStreaming.Properties {
                 this["StreamList"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int HowOftenToCheck {
+            get {
+                return ((int)(this["HowOftenToCheck"]));
+            }
+            set {
+                this["HowOftenToCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.twitch.tv/kraken/")]
+        public string TwitchAPI {
+            get {
+                return ((string)(this["TwitchAPI"]));
+            }
+            set {
+                this["TwitchAPI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Accept: application/vnd.twitchtv.v3+json")]
+        public string TwitchJSONHeaderv3 {
+            get {
+                return ((string)(this["TwitchJSONHeaderv3"]));
+            }
+            set {
+                this["TwitchJSONHeaderv3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Accept: application/vnd.twitchtv.v2+json")]
+        public string TwitchJSONHeaderv2 {
+            get {
+                return ((string)(this["TwitchJSONHeaderv2"]));
+            }
+            set {
+                this["TwitchJSONHeaderv2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.twitch.tv/kraken/streams/")]
+        public string TwitchAPIStream {
+            get {
+                return ((string)(this["TwitchAPIStream"]));
+            }
+            set {
+                this["TwitchAPIStream"] = value;
+            }
+        }
     }
 }
