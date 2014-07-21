@@ -12,9 +12,20 @@ namespace AreGamersStreaming.ViewModel
     public class AGS_UserControl : CommonBase
     {
         private IUserPref _Preference = new UserPref();
+        private string _AddStreamInput;
 
-        
-
+        public string AddStreamInput
+        {
+            get{return _AddStreamInput;}
+            set
+            {
+                if (_AddStreamInput != value)
+                {
+                    _AddStreamInput = value;
+                    RaisePropertyChanged("AddUser");
+                }
+            }
+        }
 
         public bool IsStartBoot
         {
