@@ -66,8 +66,11 @@
     </ApplicationDefinition>
     <Compile Include="Model\ITwitchPref.cs" />
     <Compile Include="Model\IUserPref.cs" />
+    <Compile Include="Model\StreamList.cs" />
     <Compile Include="Model\TwitchPref.cs" />
+    <Compile Include="Networking\GeneralNetwork.cs" />
     <Compile Include="Networking\JSONtoString.cs" />
+    <Compile Include="Twitch\TwitchValidation.cs" />
     <Compile Include="ViewModel\AGS_UserControl.cs" />
     <Compile Include="ViewModel\DelegateCast.cs" />
     <Compile Include="View\StartControl.xaml.cs">
@@ -123,7 +126,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Validation\" />
+    <Folder Include="Config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

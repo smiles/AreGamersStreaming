@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using System.Windows;
 
 namespace AreGamersStreaming.ViewModel
 {
     using Smiles.MvvM.Lib;
     using Properties;
     using AreGamersStreaming.Model;
+    using AreGamersStreaming.Twitch;
+    using View;
 
     public class AGS_UserControl : CommonBase
     {
@@ -22,7 +26,7 @@ namespace AreGamersStreaming.ViewModel
                 if (_AddStreamInput != value)
                 {
                     _AddStreamInput = value;
-                    RaisePropertyChanged("AddUser");
+                    RaisePropertyChanged("AddStreamInput");
                 }
             }
         }
@@ -49,6 +53,27 @@ namespace AreGamersStreaming.ViewModel
                 {
                     _Preference.IsMinamizeAtStart = value;
                     RaisePropertyChanged("IsMinStart");
+                }
+            }
+        }
+
+        public ICommand AddButton
+        {
+            get { return new DelegateCast(_TheAddButton); }
+        }
+
+        private void _TheAddButton()
+        {
+            if(AddStreamInput != null)
+            {
+                if (TwitchValidation.IsValidStream(this.AddStreamInput)) 
+                {
+                    
+                    this.AddStreamInput = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("fail");
                 }
             }
         }

@@ -7,6 +7,7 @@ namespace AreGamersStreaming.Model
 {
     using Properties;
     using AreGamersStreaming.Model;
+    using System.Collections.Specialized;
 
     public class UserPref : IUserPref
     {
@@ -15,6 +16,8 @@ namespace AreGamersStreaming.Model
         private bool _IsStartAtBoot = Settings.Default.Bootatstartup;
         private bool _IsMinamizedAtStart = Settings.Default.Minamizeatstart;
         private int _HowOftenToCheck = Settings.Default.HowOftenToCheck;
+        private StringCollection _StreamCollection = Settings.Default.StreamList;
+        private List<string> _StreamList = new List<string>();
 
         #endregion
 
@@ -46,12 +49,6 @@ namespace AreGamersStreaming.Model
                     Settings.Default.Save();
                 }
             }
-        }
-
-        public List<string> UserStreamList
-        {
-            get;
-            set;
         }
 
         public int HowOftenToCheck

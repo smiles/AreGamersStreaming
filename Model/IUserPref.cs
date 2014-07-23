@@ -19,12 +19,6 @@ namespace AreGamersStreaming.Model
             set;
         }
 
-        List<string> UserStreamList
-        {
-            get;
-            set;
-        }
-
         int HowOftenToCheck
         {
             get;

@@ -20,17 +20,22 @@ namespace AreGamersStreaming.Twitch
             public string StreamAPI
             {
                 get;
-                private set;
+                set;
             }
 
+            public string StreamURL
+            {
+                get;
+                private set;
+            }
             #endregion
 
             #region Constructs
                        
 
-            public TwitchStream(string streamAPI)
+            public TwitchStream(string streamURL)
             {
-                StreamAPI = streamAPI;
+                StreamURL = streamURL;
                 StreamJSON = new RootObject();
             }
 
