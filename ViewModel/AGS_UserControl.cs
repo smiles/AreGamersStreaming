@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace AreGamersStreaming.ViewModel
 {
@@ -13,10 +14,18 @@ namespace AreGamersStreaming.ViewModel
     using AreGamersStreaming.Twitch;
     using View;
 
-    public class AGS_UserControl : CommonBase
+    public class AGS_UserControl : CommonBase 
     {
         private IUserPref _Preference = new UserPref();
         private string _AddStreamInput;
+        private List<string> _StreamList = new List<string>();
+        private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>(); 
+
+        public AGS_UserControl()
+        {
+            _StreamList = _Preference.AllStreamList;
+            _PopulateComboBox();
+        }
 
         public string AddStreamInput
         {
@@ -57,9 +66,25 @@ namespace AreGamersStreaming.ViewModel
             }
         }
 
+        public ObservableCollection<string> ComboBoxList
+        {
+            get { return _ComboBoxList; }
+        }
+
+        public string SelectedComboBoxItem
+        {
+            get;
+            set;
+        }
+
         public ICommand AddButton
         {
             get { return new DelegateCast(_TheAddButton); }
+        }
+
+        public ICommand DelButton
+        {
+            get { return new DelegateCast(_TheDeleteButton); }
         }
 
         private void _TheAddButton()
@@ -68,12 +93,36 @@ namespace AreGamersStreaming.ViewModel
             {
                 if (TwitchValidation.IsValidStream(this.AddStreamInput)) 
                 {
-                    
+                    _ComboBoxList.Add(this.AddStreamInput);
+                    _StreamList.Add(this.AddStreamInput);
+                    _Preference.AllStreamList = _StreamList;
                     this.AddStreamInput = string.Empty;
                 }
                 else
                 {
                     MessageBox.Show("fail");
+                }
+            }
+        }
+
+        private void _TheDeleteButton()
+        {
+            if(this.SelectedComboBoxItem != null)
+            {
+                _ComboBoxList.Remove(this.SelectedComboBoxItem);
+                _StreamList.Remove(this.SelectedComboBoxItem);
+                _Preference.AllStreamList = _StreamList;
+                
+            }
+        }
+
+        private void _PopulateComboBox()
+        {
+            if(_StreamList != null)
+            {
+                foreach(string AllStreamURL in _StreamList)
+                {
+                    _ComboBoxList.Add(AllStreamURL);
                 }
             }
         }

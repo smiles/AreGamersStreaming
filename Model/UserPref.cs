@@ -23,6 +23,14 @@ namespace AreGamersStreaming.Model
 
         #region Properties
 
+        public UserPref()
+        {
+            if (_StreamCollection != null)
+            {
+                _StreamList = _StreamCollection.Cast<string>().ToList();
+            }
+        }
+
         public bool IsStartAtBoot
         {
             get { return _IsStartAtBoot; }
@@ -64,6 +72,28 @@ namespace AreGamersStreaming.Model
                 }
             }
         }
+
+        public List<string> AllStreamList
+        {
+            get
+            {
+                return _StreamList;
+            }
+            set
+            {
+                if(value != null)
+                {
+                    _StreamList = value;
+                    StringCollection collection = new StringCollection();
+                        collection.AddRange(_StreamList.ToArray());
+                        Settings.Default.StreamList = collection;
+                        Settings.Default.Save();
+                    
+                }
+            }
+        }
+
+       
 
         #endregion
     }

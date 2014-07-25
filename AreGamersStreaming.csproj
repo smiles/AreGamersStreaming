@@ -66,7 +66,6 @@
     </ApplicationDefinition>
     <Compile Include="Model\ITwitchPref.cs" />
     <Compile Include="Model\IUserPref.cs" />
-    <Compile Include="Model\StreamList.cs" />
     <Compile Include="Model\TwitchPref.cs" />
     <Compile Include="Networking\GeneralNetwork.cs" />
     <Compile Include="Networking\JSONtoString.cs" />
@@ -125,9 +124,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

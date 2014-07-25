@@ -24,5 +24,11 @@ namespace AreGamersStreaming.Model
             get;
             set;
         }
+
+        List<string> AllStreamList
+        {
+            get;
+            set;
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 namespace AreGamersStreaming.Twitch
 {
     using Properties;
+    using Model;
 
     public class TwitchLogic
     {
@@ -15,25 +16,24 @@ namespace AreGamersStreaming.Twitch
         private List<TwitchStream> _AllStreams = new List<TwitchStream>();
         private List<string> _StreamList = new List<string>();
         private string _TwitchStreamAPI = Settings.Default.TwitchAPIStream;
+        private UserPref _Preference = new UserPref();
 
         #endregion
 
         public TwitchLogic()
         {
             ConvertListToTwitchStreams();
+            _HowOftenToCheck = _Preference.HowOftenToCheck;
         }
 
-        public void UpdateHowOftenToCheck()
-        {
-            _HowOftenToCheck = Settings.Default.HowOftenToCheck;
-        }
+       
 
 
         #region Private Methods
 
         private void ConvertListToTwitchStreams()
         {
-            _StreamList = Settings.Default.StreamList.Cast<string>().ToList();
+            _StreamList = _Preference.AllStreamList;
 
             foreach(string streamList in _StreamList)
             {
