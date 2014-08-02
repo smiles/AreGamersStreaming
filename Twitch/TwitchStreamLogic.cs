@@ -30,8 +30,7 @@ namespace AreGamersStreaming.Twitch
         #region Events
 
         public event EventHandler<TwitchStreamInfo> SomeoneIsStreamingEvent;
-        public event EventHandler NoOneIsStreamingEvent;
-        public event EventHandler NetworkErrorEvent;
+        public event EventHandler NetworkNotConnectedEvent;
 
         #endregion
 
@@ -83,6 +82,10 @@ namespace AreGamersStreaming.Twitch
 
         private void CheckStreams(object sender, EventArgs e)
         {
+            while(!GeneralNetwork.IsNetworkConnected())
+            {
+                OnNetworkNotConnectedEvent();
+            }
             _TwitchRequest.GetAllTwitchStream(_AllStreams);
             CheckIfAnyStreaming();
         }
@@ -118,6 +121,16 @@ namespace AreGamersStreaming.Twitch
             if(handler != null)
             {
                 handler(this, e);
+            }
+        }
+
+        protected virtual void OnNetworkNotConnectedEvent()
+        {
+            EventHandler handler = NetworkNotConnectedEvent;
+
+            if(handler != null)
+            {
+                handler(this, EventArgs.Empty);
             }
         }
 
