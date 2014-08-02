@@ -42,11 +42,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,6 +71,8 @@
     <Compile Include="Model\TwitchPref.cs" />
     <Compile Include="Networking\GeneralNetwork.cs" />
     <Compile Include="Networking\JSONtoString.cs" />
+    <Compile Include="Twitch\ITwitchStreamLogic.cs" />
+    <Compile Include="Twitch\TwitchStreamInfo.cs" />
     <Compile Include="Twitch\TwitchValidation.cs" />
     <Compile Include="ViewModel\AGS_UserControl.cs" />
     <Compile Include="ViewModel\DelegateCast.cs" />
@@ -85,10 +89,10 @@
     </Compile>
     <Compile Include="Model\UserPref.cs" />
     <Compile Include="Twitch\TwitchEngine.cs" />
-    <Compile Include="Twitch\TwitchLogic.cs" />
+    <Compile Include="Twitch\TwitchStreamLogic.cs" />
     <Compile Include="Twitch\TwitchStream.cs" />
     <Compile Include="ViewModel\CommonBase.cs" />
-    <Compile Include="ViewModel\Notification.cs" />
+    <Compile Include="TaskBar\TaskBarNotify.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

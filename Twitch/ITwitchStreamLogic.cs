@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace AreGamersStreaming.ViewModel
+namespace AreGamersStreaming.Twitch
 {
-    class Notification
+    interface ITwitchStreamLogic
     {
     }
 }
