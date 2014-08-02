@@ -10,7 +10,7 @@ namespace AreGamersStreaming.Twitch
     using Model;
     using Smiles.Common.Lib;
 
-    public class TwitchStreamLogic
+    public class TwitchStreamLogic : AreGamersStreaming.Twitch.ITwitchStreamLogic
     {
         #region Private Variables
 
@@ -30,7 +30,6 @@ namespace AreGamersStreaming.Twitch
         #region Events
 
         public event EventHandler<TwitchStreamInfo> SomeoneIsStreamingEvent;
-        public event EventHandler NetworkNotConnectedEvent;
 
         #endregion
 
@@ -44,7 +43,10 @@ namespace AreGamersStreaming.Twitch
             StartCheckStream();
         }
 
-
+        public void StopCheckingForStreams()
+        {
+            _CheckEvery.Stop();
+        }
 
         public void UpdateListFromDB()
         {
@@ -82,10 +84,6 @@ namespace AreGamersStreaming.Twitch
 
         private void CheckStreams(object sender, EventArgs e)
         {
-            while(!GeneralNetwork.IsNetworkConnected())
-            {
-                OnNetworkNotConnectedEvent();
-            }
             _TwitchRequest.GetAllTwitchStream(_AllStreams);
             CheckIfAnyStreaming();
         }
@@ -124,15 +122,7 @@ namespace AreGamersStreaming.Twitch
             }
         }
 
-        protected virtual void OnNetworkNotConnectedEvent()
-        {
-            EventHandler handler = NetworkNotConnectedEvent;
-
-            if(handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
+       
 
         #endregion
     }
