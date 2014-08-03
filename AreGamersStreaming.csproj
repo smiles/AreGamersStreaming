@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AGS_Core\AGS_Logic.cs" />
     <Compile Include="Model\ITwitchPref.cs" />
     <Compile Include="Model\IUserPref.cs" />
     <Compile Include="Model\TwitchPref.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Twitch\TwitchStreamLogic.cs" />
     <Compile Include="Twitch\TwitchStream.cs" />
     <Compile Include="ViewModel\CommonBase.cs" />
-    <Compile Include="TaskBar\TaskBarNotify.cs" />
+    <Compile Include="AGS_Core\AGS_TaskBar.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -128,7 +129,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AGS_Core\" />
+    <None Include="Resources\Mirella-Gabriele-Fantasy-Mediaeval-Poison-blue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mirella-Gabriele-Fantasy-Mediaeval-Poison-green.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mirella-Gabriele-Fantasy-Mediaeval-Poison-red.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
