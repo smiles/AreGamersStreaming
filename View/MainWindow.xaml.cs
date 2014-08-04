@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 namespace AreGamersStreaming
 {
+    using AreGamersStreaming.AGS_Core;
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -22,6 +23,7 @@ namespace AreGamersStreaming
         public MainWindow()
         {
             InitializeComponent();
+            AGS_Logic Core = new AGS_Logic();
         }
     }
 }

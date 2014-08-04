@@ -85,9 +85,9 @@ namespace AreGamersStreaming.Model
                 {
                     _StreamList = value;
                     StringCollection collection = new StringCollection();
-                        collection.AddRange(_StreamList.ToArray());
-                        Settings.Default.StreamList = collection;
-                        Settings.Default.Save();
+                    collection.AddRange(value.ToArray());
+                    Settings.Default.StreamList = collection;
+                    Settings.Default.Save();
                     
                 }
             }

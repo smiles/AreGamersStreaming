@@ -21,6 +21,7 @@ namespace AreGamersStreaming.Twitch
         private IUserPref _Preference = new UserPref();
         private ITwitchPref _TwitchInfo = new TwitchPref();
         private int _HowOftenToCheck;
+        private bool _IsCheckingForStreams;
 
         private Timer _CheckEvery = new Timer();
         private TwitchEngine _TwitchRequest = new TwitchEngine();
@@ -33,19 +34,41 @@ namespace AreGamersStreaming.Twitch
 
         #endregion
 
+        public bool IsChecking
+        {
+            get { return _IsCheckingForStreams; }
+            set
+            {
+                _IsCheckingForStreams = value;
+            }
+        }
+
         public TwitchStreamLogic()
         {
-            
+            _HowOftenToCheck = _Preference.HowOftenToCheck;
+            _TwitchStreamAPI = _TwitchInfo.TwitchAPIStream;
         }
 
         public void StartCheckingForStreams()
         {
-            StartCheckStream();
+            this.IsChecking = true;
+            _CheckEvery.Interval = 6000 * _HowOftenToCheck;
+            _CheckEvery.Tick += CheckStreams;
+            _CheckEvery.Start();
         }
 
         public void StopCheckingForStreams()
         {
+            this.IsChecking = false;
             _CheckEvery.Stop();
+        }
+
+        public void RestartCheck()
+        {
+            if (!this.IsChecking)
+            {
+                _CheckEvery.Start();
+            }
         }
 
         public void UpdateListFromDB()
@@ -56,7 +79,10 @@ namespace AreGamersStreaming.Twitch
 
         public void UpdateHowOftenToCheck()
         {
+            _CheckEvery.Stop();
             _HowOftenToCheck = _Preference.HowOftenToCheck;
+            _CheckEvery.Interval = 6000 * _HowOftenToCheck;
+            _CheckEvery.Start();
         }
 
 
@@ -102,12 +128,7 @@ namespace AreGamersStreaming.Twitch
             }
         }
 
-        private void StartCheckStream()
-        {
-            _CheckEvery.Interval = 6000 * _HowOftenToCheck;
-            _CheckEvery.Tick += CheckStreams;
-            _CheckEvery.Start();
-        }
+        
 
         #endregion
 

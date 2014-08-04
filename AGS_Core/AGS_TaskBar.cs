@@ -10,14 +10,16 @@ namespace AreGamersStreaming.AGS_Core
     public class AGS_TaskBar
     {
 
-        private NotifyIcon _NotifyIC = new NotifyIcon();
+        private NotifyIcon _NotifyIC;
         private string _AGSTitle = "Are Gamers Streaming?";
         private string _AGSHoverOver = "Are Gamers Streaming?";
 
         public AGS_TaskBar()
         {
+            _NotifyIC = new NotifyIcon();
             _NotifyIC.BalloonTipTitle = _AGSTitle;
             _NotifyIC.Text = _AGSHoverOver;
+            _NotifyIC.Visible = true;
         }
 
         public void DisconnectedNetworkAlertICO()

@@ -20,10 +20,11 @@ namespace AreGamersStreaming.Twitch
 
         public void GetAllTwitchStream(List<TwitchStream> allStreams)
         {
-            foreach(TwitchStream stream in allStreams)
+            foreach (TwitchStream stream in allStreams)
             {
-                stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamAPI));
-            }
+               
+                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamAPI));
+                }
         }
     }
 }

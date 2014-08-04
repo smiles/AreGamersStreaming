@@ -109,8 +109,8 @@ namespace AreGamersStreaming.ViewModel
         {
             if(this.SelectedComboBoxItem != null)
             {
-                _ComboBoxList.Remove(this.SelectedComboBoxItem);
                 _StreamList.Remove(this.SelectedComboBoxItem);
+                _ComboBoxList.Remove(this.SelectedComboBoxItem);
                 _Preference.AllStreamList = _StreamList;
                 
             }

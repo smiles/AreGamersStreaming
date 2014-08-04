@@ -28,29 +28,39 @@ namespace Smiles.Common.Http
             this.JSONHeader = header;
         }
         
-        public string GetJSON(string URL)
+        public async Task<string> GetJSON(string URL)
         {
-            JSONRequest(URL).Wait();
-            return _StringJSON;
-        }
-
-        private async Task JSONRequest(string URL)
-        {
-            using(HttpClient client = new HttpClient())
+             using(HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this.JSONHeader));
 
                 HttpResponseMessage response = await client.GetAsync(URL);
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
-                    _StringJSON = await response.Content.ReadAsStringAsync();
+                    return _StringJSON = await response.Content.ReadAsStringAsync();
                 }
                 else
                 {
-                    _StringJSON = null;
+                    return _StringJSON = void;
                 }
             }
+           // return JSONRequest(URL).Wait();
         }
+
+        //private async Task<string> JSONRequest(string URL)
+        //{
+        //    using(HttpClient client = new HttpClient())
+        //    {
+        //        client.DefaultRequestHeaders.Accept.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this.JSONHeader));
+
+        //        HttpResponseMessage response = await client.GetAsync(URL);
+        //        if(response.IsSuccessStatusCode)
+        //        {
+        //            return _StringJSON = await response.Content.ReadAsStringAsync();
+        //        }
+        //    }
+        //}
     }
 }
