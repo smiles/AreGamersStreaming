@@ -8,6 +8,7 @@ namespace AreGamersStreaming.Twitch
 {
     using Smiles.Common.Http;
     using Properties;
+    using System.Threading.Tasks;
 
     public class TwitchEngine
     {
@@ -15,15 +16,17 @@ namespace AreGamersStreaming.Twitch
 
         public void GetTwitchStream(TwitchStream stream)
         {
-            stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamAPI));
+            Task<string> holder = _GetTwitchJSON.GetJSON(stream.StreamAPI);
+            stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(holder.ToString());
         }
 
         public void GetAllTwitchStream(List<TwitchStream> allStreams)
         {
             foreach (TwitchStream stream in allStreams)
             {
-               
-                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamAPI));
+                Task<string> holder = _GetTwitchJSON.GetJSON(stream.StreamAPI);
+
+                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(holder.ToString());
                 }
         }
     }

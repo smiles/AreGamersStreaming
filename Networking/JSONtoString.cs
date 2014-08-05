@@ -36,14 +36,8 @@ namespace Smiles.Common.Http
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this.JSONHeader));
 
                 HttpResponseMessage response = await client.GetAsync(URL);
-                if (response.IsSuccessStatusCode)
-                {
-                    return _StringJSON = await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                    return _StringJSON = void;
-                }
+                return await response.Content.ReadAsStringAsync();
+               
             }
            // return JSONRequest(URL).Wait();
         }
