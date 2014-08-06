@@ -98,7 +98,7 @@ namespace AreGamersStreaming.Twitch
 
             foreach(string streamList in _StreamList)
             {
-                _AllStreams.Add(new TwitchStream(ConvertStreamURLToAPIAddress(streamList)));
+                _AllStreams.Add(new TwitchStream(streamList, ConvertStreamURLToAPIAddress(streamList)));
             }
 
         }

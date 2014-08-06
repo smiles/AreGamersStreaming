@@ -17,13 +17,13 @@ namespace AreGamersStreaming.Twitch
         {
             _URL = URL;
             _StreamImage = streamImage;
-            _BaseStreamName = URL.Substring(22, URL.Length - 22);
+            _BaseStreamName = URL.Substring(14, URL.Length - 14);
         }
 
         public TwitchStreamInfo(string URL)
         {
             _URL = URL;
-            _BaseStreamName = URL.Substring(22, URL.Length - 22);
+            _BaseStreamName = URL.Substring(14, URL.Length - 14);
         }
 
         public string URL

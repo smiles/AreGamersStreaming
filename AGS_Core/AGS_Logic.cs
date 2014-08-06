@@ -14,6 +14,7 @@ namespace AreGamersStreaming.AGS_Core
         private ITwitchStreamLogic _StreamLogic = new TwitchStreamLogic();
         private AGS_TaskBar _TaskBar = new AGS_TaskBar();
         private List<TwitchStreamInfo> _ListOfStreamers = new List<TwitchStreamInfo>();
+        private int _BalloonTimeVisiable = 7000;
 
         public AGS_Logic()
         {
@@ -31,7 +32,7 @@ namespace AreGamersStreaming.AGS_Core
         private void SomeoneStreaming(object sender, TwitchStreamInfo e)
         {
             _ListOfStreamers.Add(e);
-            _TaskBar.SomeoneIsStreamingAlertICO(7000, e.BaseStreamName, e.URL);
+            _TaskBar.SomeoneIsStreamingAlertICO(_BalloonTimeVisiable, e.BaseStreamName, e.URL);
         }
 
         private void SomeoneStopStreaming(object sender, TwitchStreamInfo e)

@@ -25,7 +25,7 @@ namespace AreGamersStreaming.Twitch
             {
                  
 
-                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamURL));
+                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamAPI));
                 }
         }
     }

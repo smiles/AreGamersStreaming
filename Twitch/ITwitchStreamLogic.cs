@@ -6,7 +6,7 @@ namespace AreGamersStreaming.Twitch
         bool IsChecking { get; set; }
         void RestartCheck();
         event EventHandler<TwitchStreamInfo> SomeoneIsStreamingEvent;
-        public event EventHandler<TwitchStreamInfo> SomeoneHasStopStreamingEvent;
+        event EventHandler<TwitchStreamInfo> SomeoneHasStopStreamingEvent;
         void StartCheckingForStreams();
         void StopCheckingForStreams();
         void UpdateHowOftenToCheck();
