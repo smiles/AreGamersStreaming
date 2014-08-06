@@ -12,21 +12,20 @@ namespace AreGamersStreaming.Twitch
 
     public class TwitchEngine
     {
-        private JSONtoString _GetTwitchJSON = new JSONtoString(Settings.Default.TwitchJSONHeaderv3);
+        private JSONtoString _GetTwitchJSON = new JSONtoString();
 
         public void GetTwitchStream(TwitchStream stream)
         {
-            Task<string> holder = _GetTwitchJSON.GetJSON(stream.StreamAPI);
-            stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(holder.ToString());
+            stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamAPI));
         }
 
         public void GetAllTwitchStream(List<TwitchStream> allStreams)
         {
             foreach (TwitchStream stream in allStreams)
             {
-                Task<string> holder = _GetTwitchJSON.GetJSON(stream.StreamAPI);
+                 
 
-                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(holder.ToString());
+                    stream.StreamJSON = JsonConvert.DeserializeObject<TwitchStream.RootObject>(_GetTwitchJSON.GetJSON(stream.StreamURL));
                 }
         }
     }

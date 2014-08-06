@@ -31,6 +31,7 @@ namespace AreGamersStreaming.AGS_Core
         {
             _NotifyIC.Icon = Properties.Resources.ICOSomeoneStreaming;
             _NotifyIC.ShowBalloonTip(balloonTime, tipTitle, tipText, ToolTipIcon.Info);
+            
         }
 
         public void NoOneIsstreamingICO()

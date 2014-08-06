@@ -13,7 +13,7 @@ namespace AreGamersStreaming.AGS_Core
     {
         private ITwitchStreamLogic _StreamLogic = new TwitchStreamLogic();
         private AGS_TaskBar _TaskBar = new AGS_TaskBar();
-        private HashSet<TwitchStreamInfo> _ListOfStreamers = new HashSet<TwitchStreamInfo>();
+        private List<TwitchStreamInfo> _ListOfStreamers = new List<TwitchStreamInfo>();
 
         public AGS_Logic()
         {
@@ -22,6 +22,7 @@ namespace AreGamersStreaming.AGS_Core
             _StreamLogic.UpdateListFromDB();
             _StreamLogic.StartCheckingForStreams();
             _StreamLogic.SomeoneIsStreamingEvent += SomeoneStreaming;
+            _StreamLogic.SomeoneHasStopStreamingEvent += SomeoneStopStreaming;
 
         }
 
@@ -29,7 +30,13 @@ namespace AreGamersStreaming.AGS_Core
 
         private void SomeoneStreaming(object sender, TwitchStreamInfo e)
         {
+            _ListOfStreamers.Add(e);
             _TaskBar.SomeoneIsStreamingAlertICO(7000, e.BaseStreamName, e.URL);
+        }
+
+        private void SomeoneStopStreaming(object sender, TwitchStreamInfo e)
+        {
+            _ListOfStreamers.RemoveAll(x => x.URL == e.URL);
         }
 
         private void NetworkWatch()

@@ -31,6 +31,7 @@ namespace AreGamersStreaming.Twitch
         #region Events
 
         public event EventHandler<TwitchStreamInfo> SomeoneIsStreamingEvent;
+        public event EventHandler<TwitchStreamInfo> SomeoneHasStopStreamingEvent;
 
         #endregion
 
@@ -52,7 +53,7 @@ namespace AreGamersStreaming.Twitch
         public void StartCheckingForStreams()
         {
             this.IsChecking = true;
-            _CheckEvery.Interval = 6000 * _HowOftenToCheck;
+            _CheckEvery.Interval = 60000 * _HowOftenToCheck;
             _CheckEvery.Tick += CheckStreams;
             _CheckEvery.Start();
         }
@@ -111,10 +112,10 @@ namespace AreGamersStreaming.Twitch
         private void CheckStreams(object sender, EventArgs e)
         {
             _TwitchRequest.GetAllTwitchStream(_AllStreams);
-            CheckIfAnyStreaming();
+            CheckStreamStatus();
         }
 
-        private void CheckIfAnyStreaming()
+        private void CheckStreamStatus()
         {
             if (_AllStreams.Count != 0)
             {
@@ -122,7 +123,19 @@ namespace AreGamersStreaming.Twitch
                 {
                     if(Stream.StreamJSON.stream != null)
                     {
-                        OnSomeoneIsStreamingEvent(new TwitchStreamInfo(Stream.StreamURL));
+                        if (!Stream.IsStreaming)
+                        {
+                            Stream.IsStreaming = true;
+                            OnSomeoneIsStreamingEvent(new TwitchStreamInfo(Stream.StreamURL));
+                        }
+                    }
+                    else
+                    {
+                        if(Stream.IsStreaming)
+                        {
+                            Stream.IsStreaming = false;
+                            OnSomeoneHasStopStreamingEvent(new TwitchStreamInfo(Stream.StreamURL));
+                        }
                     }
                 }
             }
@@ -143,6 +156,14 @@ namespace AreGamersStreaming.Twitch
             }
         }
 
+        protected virtual void OnSomeoneHasStopStreamingEvent(TwitchStreamInfo e)
+        {
+            EventHandler<TwitchStreamInfo> handler = SomeoneHasStopStreamingEvent;
+            if(handler != null)
+            {
+                handler(this, e);
+            }
+        }
        
 
         #endregion

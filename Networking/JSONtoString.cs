@@ -11,7 +11,6 @@ namespace Smiles.Common.Http
     public class JSONtoString
     {
         private string _DefaultJSONHeader = "application/json";
-        private string _StringJSON;
         
         public string JSONHeader
         {
@@ -27,34 +26,20 @@ namespace Smiles.Common.Http
         {
             this.JSONHeader = header;
         }
-        
-        public async Task<string> GetJSON(string URL)
+
+        public string GetJSON(string URL)
         {
-             using(HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this.JSONHeader));
 
-                HttpResponseMessage response = await client.GetAsync(URL);
-                return await response.Content.ReadAsStringAsync();
-               
+                HttpResponseMessage response = client.GetAsync(URL).Result;
+                return response.Content.ReadAsStringAsync().Result;
+
             }
-           // return JSONRequest(URL).Wait();
         }
 
-        //private async Task<string> JSONRequest(string URL)
-        //{
-        //    using(HttpClient client = new HttpClient())
-        //    {
-        //        client.DefaultRequestHeaders.Accept.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this.JSONHeader));
-
-        //        HttpResponseMessage response = await client.GetAsync(URL);
-        //        if(response.IsSuccessStatusCode)
-        //        {
-        //            return _StringJSON = await response.Content.ReadAsStringAsync();
-        //        }
-        //    }
-        //}
     }
 }

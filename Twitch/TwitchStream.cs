@@ -29,6 +29,12 @@ namespace AreGamersStreaming.Twitch
             get;
             set;
         }
+
+        public bool IsStreaming
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructs
