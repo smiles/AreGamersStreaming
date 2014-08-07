@@ -70,7 +70,6 @@
     <Compile Include="Model\ITwitchPref.cs" />
     <Compile Include="Model\IUserPref.cs" />
     <Compile Include="Model\TwitchPref.cs" />
-    <Compile Include="Networking\JSONtoString.cs" />
     <Compile Include="Twitch\ITwitchStreamLogic.cs" />
     <Compile Include="Twitch\TwitchStreamInfo.cs" />
     <Compile Include="Twitch\TwitchValidation.cs" />

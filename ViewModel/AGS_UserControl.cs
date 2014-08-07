@@ -14,12 +14,16 @@ namespace AreGamersStreaming.ViewModel
     using AreGamersStreaming.Twitch;
     using View;
 
-    public class AGS_UserControl : CommonBase 
+    public class AGS_UserControl : CommonBase
     {
+        #region Private Variables
+
         private IUserPref _Preference = new UserPref();
         private string _AddStreamInput;
         private List<string> _StreamList = new List<string>();
-        private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>(); 
+        private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>();
+
+        #endregion
 
         public AGS_UserControl()
         {
@@ -93,10 +97,7 @@ namespace AreGamersStreaming.ViewModel
             {
                 if (TwitchValidation.IsValidStream(this.AddStreamInput)) 
                 {
-                    _ComboBoxList.Add(this.AddStreamInput);
-                    _StreamList.Add(this.AddStreamInput);
-                    _Preference.AllStreamList = _StreamList;
-                    this.AddStreamInput = string.Empty;
+                    _AddToStreamList();
                 }
                 else
                 {
@@ -105,15 +106,32 @@ namespace AreGamersStreaming.ViewModel
             }
         }
 
+        private void _AddToStreamList()
+        {
+            if (this.AddStreamInput.StartsWith("http://"))
+            {
+                this.AddStreamInput = this.AddStreamInput.Substring(7, this.AddStreamInput.Length - 7);
+            }
+            _ComboBoxList.Add(this.AddStreamInput);
+            _StreamList.Add(this.AddStreamInput);
+            _Preference.AllStreamList = _StreamList;
+            this.AddStreamInput = string.Empty;
+        }
+
         private void _TheDeleteButton()
         {
             if(this.SelectedComboBoxItem != null)
             {
-                _StreamList.Remove(this.SelectedComboBoxItem);
-                _ComboBoxList.Remove(this.SelectedComboBoxItem);
-                _Preference.AllStreamList = _StreamList;
+                _RemoveFromStreamList();
                 
             }
+        }
+
+        private void _RemoveFromStreamList()
+        {
+            _StreamList.Remove(this.SelectedComboBoxItem);
+            _ComboBoxList.Remove(this.SelectedComboBoxItem);
+            _Preference.AllStreamList = _StreamList;
         }
 
         private void _PopulateComboBox()

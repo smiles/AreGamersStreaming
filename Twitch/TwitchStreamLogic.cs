@@ -8,7 +8,6 @@ namespace AreGamersStreaming.Twitch
 {
     using Properties;
     using Model;
-    using Smiles.Common.Http;
 
     public class TwitchStreamLogic : AreGamersStreaming.Twitch.ITwitchStreamLogic
     {
