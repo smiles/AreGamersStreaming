@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AreGamersStreaming.Twitch
 {
-    using Properties;
     using Model;
 
     public class TwitchStreamLogic : AreGamersStreaming.Twitch.ITwitchStreamLogic
@@ -90,8 +87,8 @@ namespace AreGamersStreaming.Twitch
 
         private void ConvertListToTwitchStreams()
         {
-
-            _StreamList = _Preference.AllStreamList;
+            IUserPref preference = new UserPref();
+            _StreamList = preference.AllStreamList;
 
             _AllStreams.Clear();
 

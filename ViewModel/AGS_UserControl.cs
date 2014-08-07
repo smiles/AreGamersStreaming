@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
@@ -9,10 +7,8 @@ using System.Collections.ObjectModel;
 namespace AreGamersStreaming.ViewModel
 {
     using Smiles.MvvM.Lib;
-    using Properties;
     using AreGamersStreaming.Model;
     using AreGamersStreaming.Twitch;
-    using View;
 
     public class AGS_UserControl : CommonBase
     {
@@ -24,6 +20,11 @@ namespace AreGamersStreaming.ViewModel
         private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>();
 
         #endregion
+
+        public static event EventHandler ListHasBeenUpdatedEvent;
+        public static event EventHandler HowOftenToCheckUpdatedEvent;
+
+        #region DataBindings
 
         public AGS_UserControl()
         {
@@ -81,6 +82,10 @@ namespace AreGamersStreaming.ViewModel
             set;
         }
 
+        #endregion
+
+        #region UI Click Events
+
         public ICommand AddButton
         {
             get { return new DelegateCast(_TheAddButton); }
@@ -91,6 +96,10 @@ namespace AreGamersStreaming.ViewModel
             get { return new DelegateCast(_TheDeleteButton); }
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void _TheAddButton()
         {
             if(AddStreamInput != null)
@@ -98,6 +107,7 @@ namespace AreGamersStreaming.ViewModel
                 if (TwitchValidation.IsValidStream(this.AddStreamInput)) 
                 {
                     _AddToStreamList();
+                    _OnListHasBeenUpdatedEvent();
                 }
                 else
                 {
@@ -123,7 +133,7 @@ namespace AreGamersStreaming.ViewModel
             if(this.SelectedComboBoxItem != null)
             {
                 _RemoveFromStreamList();
-                
+                _OnListHasBeenUpdatedEvent();
             }
         }
 
@@ -144,5 +154,28 @@ namespace AreGamersStreaming.ViewModel
                 }
             }
         }
+
+        private void _OnListHasBeenUpdatedEvent()
+        {
+            EventHandler handler = ListHasBeenUpdatedEvent;
+            
+            if(handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        private void _OnHowOftenToCheckUpdatedEvent()
+        {
+            EventHandler handler = HowOftenToCheckUpdatedEvent;
+
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+
     }
 }

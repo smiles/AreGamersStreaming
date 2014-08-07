@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 
 namespace AreGamersStreaming.AGS_Core
 {
     using Twitch;
+    using ViewModel;
 
     public class AGS_Logic
     {
@@ -24,6 +22,7 @@ namespace AreGamersStreaming.AGS_Core
             _StreamLogic.StartCheckingForStreams();
             _StreamLogic.SomeoneIsStreamingEvent += SomeoneStreaming;
             _StreamLogic.SomeoneHasStopStreamingEvent += SomeoneStopStreaming;
+            AGS_UserControl.ListHasBeenUpdatedEvent += ListOfStreamersChanged;
 
         }
 
@@ -38,6 +37,11 @@ namespace AreGamersStreaming.AGS_Core
         private void SomeoneStopStreaming(object sender, TwitchStreamInfo e)
         {
             _ListOfStreamers.RemoveAll(x => x.URL == e.URL);
+        }
+
+        private void ListOfStreamersChanged(object sender, EventArgs e)
+        {
+            _StreamLogic.UpdateListFromDB();
         }
 
         private void NetworkWatch()

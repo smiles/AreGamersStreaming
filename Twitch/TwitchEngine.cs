@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace AreGamersStreaming.Twitch
 {
-    using Properties;
-    using System.Threading.Tasks;
 
     public class TwitchEngine
     {
