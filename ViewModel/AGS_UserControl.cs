@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
+using System.Drawing;
 
 namespace AreGamersStreaming.ViewModel
 {
@@ -31,6 +32,13 @@ namespace AreGamersStreaming.ViewModel
             _StreamList = _Preference.AllStreamList;
             _PopulateComboBox();
         }
+
+        public WindowState AGSWindowState
+        {
+            get;
+            set;
+        }
+
 
         public string AddStreamInput
         {

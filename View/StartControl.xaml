@@ -19,17 +19,16 @@
             </MenuItem>
         </Menu>
         <Grid>
-            <Button x:Name="AddStream" Height="25" Width="70" Margin="10,10,0,5"  HorizontalAlignment="Left" Command="{Binding Path=AddButton}" >Add Stream</Button>
-            <TextBox x:Name="AddStreamInput" Height="25" Width="175" Margin="0,10,20,5" HorizontalAlignment="Right" Text="{Binding Path=AddStreamInput}"> 
-                
-            </TextBox>
+            <Button x:Name="AddStream" Height="25" Width="70" Margin="10,10,0,5"  HorizontalAlignment="Left" Command="{Binding Path=AddButton}" BorderBrush="#FFB9A3E3" >Add Stream</Button>
+            <TextBox x:Name="AddStreamInput" Height="25" Width="175" Margin="0,10,20,5" HorizontalAlignment="Right" Text="{Binding Path=AddStreamInput}"></TextBox>
         </Grid>
         <Grid>
-            <Button x:Name="DelStream" Height="25" Width="70" Margin="10,10,0,5" HorizontalAlignment="Left" Command="{Binding Path=DelButton}" >Del Stream</Button>
+            <Button x:Name="DelStream" Height="25" Width="70" Margin="10,10,0,5" HorizontalAlignment="Left" Command="{Binding Path=DelButton}" BorderBrush="#FFB9A3E3" >Del Stream</Button>
             <ComboBox x:Name="DelList" Height="25" Width="175" Margin="0,10,20,5" HorizontalAlignment="right" ItemsSource="{Binding Path=ComboBoxList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedComboBoxItem}"></ComboBox>
         </Grid>    
-            <CheckBox x:Name="BootStart" Content="Start at startup" Margin="20,10,10,10" HorizontalAlignment="Left" IsChecked="{Binding Path=IsStartBoot}"/>
-            <CheckBox x:Name="StartMin" Content="Minamize at start" Margin="20,10,10,10" HorizontalAlignment="Left" IsChecked="{Binding Path=IsMinStart}" />
+            <CheckBox x:Name="BootStart" Content="Start at startup" Margin="20,10,10,10" HorizontalAlignment="Left" IsChecked="{Binding Path=IsStartBoot}" BorderBrush="#FFB9A3E3"/>
+            <CheckBox x:Name="StartMin" Content="Minamize at start" Margin="20,10,10,10" HorizontalAlignment="Left" IsChecked="{Binding Path=IsMinStart}" BorderBrush="#FFB9A3E3" />
+
     </StackPanel>
-       
+
 </UserControl>
