@@ -19,24 +19,61 @@ namespace AreGamersStreaming.ViewModel
         private string _AddStreamInput;
         private List<string> _StreamList = new List<string>();
         private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>();
+        private WindowState _AGSWindow;
+        private bool _MinToStart;
+        private bool _TaskBar;
+        private Visibility _Visib;
 
         #endregion
 
+        #region Events
+
         public static event EventHandler ListHasBeenUpdatedEvent;
         public static event EventHandler HowOftenToCheckUpdatedEvent;
+
+        #endregion
 
         #region DataBindings
 
         public AGS_UserControl()
         {
             _StreamList = _Preference.AllStreamList;
+            _MinToStart = _Preference.IsMinamizeAtStart;
             _PopulateComboBox();
+            _MinimizeOnStart();
         }
 
         public WindowState AGSWindowState
         {
-            get;
-            set;
+            get { return _AGSWindow; }
+            set
+            {
+                    _AGSWindow = value;
+                    RaisePropertyChanged("AGSWindowState");
+            }
+        }
+
+        public Visibility Visib
+        {
+            get { return _Visib; }
+            set
+            {
+                _Visib = value;
+                RaisePropertyChanged("Visib");
+            }
+        }
+
+        public bool ShowTaskBar
+        {
+            get { return _TaskBar; }
+            set
+            {
+                if (_TaskBar != value)
+                {
+                    _TaskBar = value;
+                    RaisePropertyChanged("ShowTaskBar");
+                }
+            }
         }
 
 
@@ -68,11 +105,12 @@ namespace AreGamersStreaming.ViewModel
 
         public bool IsMinStart
         {
-            get {return _Preference.IsMinamizeAtStart; }
+            get { return _MinToStart; }
             set
             {
-                if(_Preference.IsMinamizeAtStart != value)
+                if(_MinToStart != value)
                 {
+                    _MinToStart = value;
                     _Preference.IsMinamizeAtStart = value;
                     RaisePropertyChanged("IsMinStart");
                 }
@@ -180,6 +218,17 @@ namespace AreGamersStreaming.ViewModel
             if (handler != null)
             {
                 handler(this, EventArgs.Empty);
+            }
+        }
+
+        private void _MinimizeOnStart()
+        {
+            if(this.IsMinStart)
+            {
+                
+                this.AGSWindowState = WindowState.Minimized;
+                this.ShowTaskBar = false;
+                this.Visib = Visibility.Collapsed;
             }
         }
 

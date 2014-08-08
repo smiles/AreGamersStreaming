@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:AreGamersStreaming.View"
         Title="Are Gamers Streaming?" Height="300" Width="300"
-        WindowState="{Binding Path=AGSWindowState}"
+        WindowState="{Binding Path=AGSWindowState, UpdateSourceTrigger=PropertyChanged}"
+        ShowInTaskbar="{Binding Path=ShowTaskBar, UpdateSourceTrigger=PropertyChanged}"
+        Visibility="{Binding Path=Visib, UpdateSourceTrigger=PropertyChanged}"
         ResizeMode="CanMinimize" 
         Background="#FF6441A5">
     <Grid>

@@ -24,6 +24,9 @@ namespace AreGamersStreaming
         {
             InitializeComponent();
             AGS_Logic Core = new AGS_Logic();
+            Hide();
         }
+
+     
     }
 }
