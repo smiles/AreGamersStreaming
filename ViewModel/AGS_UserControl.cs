@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
-using System.Drawing;
 
 namespace AreGamersStreaming.ViewModel
 {
@@ -28,54 +27,23 @@ namespace AreGamersStreaming.ViewModel
 
         #region Events
 
-        public static event EventHandler ListHasBeenUpdatedEvent;
-        public static event EventHandler HowOftenToCheckUpdatedEvent;
+        public event EventHandler ListHasBeenUpdatedEvent;
+        public event EventHandler HowOftenToCheckUpdatedEvent;
 
         #endregion
 
-        #region DataBindings
+        #region Construct
 
         public AGS_UserControl()
         {
             _StreamList = _Preference.AllStreamList;
             _MinToStart = _Preference.IsMinamizeAtStart;
             _PopulateComboBox();
-            _MinimizeOnStart();
         }
 
-        public WindowState AGSWindowState
-        {
-            get { return _AGSWindow; }
-            set
-            {
-                    _AGSWindow = value;
-                    RaisePropertyChanged("AGSWindowState");
-            }
-        }
+        #endregion
 
-        public Visibility Visib
-        {
-            get { return _Visib; }
-            set
-            {
-                _Visib = value;
-                RaisePropertyChanged("Visib");
-            }
-        }
-
-        public bool ShowTaskBar
-        {
-            get { return _TaskBar; }
-            set
-            {
-                if (_TaskBar != value)
-                {
-                    _TaskBar = value;
-                    RaisePropertyChanged("ShowTaskBar");
-                }
-            }
-        }
-
+        #region DataBindings
 
         public string AddStreamInput
         {
@@ -144,6 +112,12 @@ namespace AreGamersStreaming.ViewModel
 
         #endregion
 
+        #region Public Methods
+
+        
+
+        #endregion
+
         #region Private Methods
 
         private void _TheAddButton()
@@ -194,6 +168,8 @@ namespace AreGamersStreaming.ViewModel
         {
             if(_StreamList != null)
             {
+                _ComboBoxList.Clear();
+
                 foreach(string AllStreamURL in _StreamList)
                 {
                     _ComboBoxList.Add(AllStreamURL);
@@ -218,17 +194,6 @@ namespace AreGamersStreaming.ViewModel
             if (handler != null)
             {
                 handler(this, EventArgs.Empty);
-            }
-        }
-
-        private void _MinimizeOnStart()
-        {
-            if(this.IsMinStart)
-            {
-                
-                this.AGSWindowState = WindowState.Minimized;
-                this.ShowTaskBar = false;
-                this.Visib = Visibility.Collapsed;
             }
         }
 

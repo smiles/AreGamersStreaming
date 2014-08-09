@@ -20,13 +20,31 @@ namespace AreGamersStreaming
     /// </summary>
     public partial class MainWindow : Window
     {
+        private AGS_Logic Core;
+
         public MainWindow()
         {
             InitializeComponent();
-            AGS_Logic Core = new AGS_Logic();
-            Hide();
+            Core = new AGS_Logic();
+            AutoMinamizeStart();
+            Core.IconDoubleClick += DoubleClickResize;
         }
 
-     
+        private void DoubleClickResize(object sender, EventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Normal;
+            this.ShowInTaskbar = true;
+            this.Show();
+        }
+
+        private void AutoMinamizeStart()
+        {
+            if (Core.StartMinimize())
+            {
+                this.WindowState = System.Windows.WindowState.Minimized;
+                this.ShowInTaskbar = false;
+                this.Hide();
+            }
+        }
     }
 }

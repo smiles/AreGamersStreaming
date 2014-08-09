@@ -1,42 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Windows.Forms;
+
 
 namespace AreGamersStreaming.AGS_Core
 {
     using Twitch;
     using ViewModel;
 
-    public class AGS_Logic
+    public class AGS_Logic 
     {
         private ITwitchStreamLogic _StreamLogic = new TwitchStreamLogic();
-        private AGS_TaskBar _TaskBar = new AGS_TaskBar();
         private List<TwitchStreamInfo> _ListOfStreamers = new List<TwitchStreamInfo>();
         private int _BalloonTimeVisiable = 7000;
+        private AGS_UserControl _UserControl = new AGS_UserControl();
+        private NotifyIcon _NotifyIC;
+        private string _AGSTitle = "Are Gamers Streaming?";
+        private string _AGSHoverOver = "Are Gamers Streaming?";
+
+        public event EventHandler IconDoubleClick;
+
+        #region Construct
 
         public AGS_Logic()
         {
-            _TaskBar.NoOneIsstreamingICO();
             NetworkWatch();
+            TwitchStreamLogicSetup();
+            TaskBarSetup();
+            _UserControl.ListHasBeenUpdatedEvent += ListOfStreamersChanged;
+            _NotifyIC.DoubleClick += OnIconDoubleClick;
+        }
+
+
+        #endregion
+
+        public bool StartMinimize()
+        {
+            return _UserControl.IsMinStart;
+        }
+
+        #region Taskbar
+
+        private void TaskBarSetup()
+        {
+            _NotifyIC = new NotifyIcon();
+            _NotifyIC.BalloonTipTitle = _AGSTitle;
+            _NotifyIC.Text = _AGSHoverOver;
+            _NotifyIC.Visible = true;
+
+            NoOneIsstreamingICO();
+
+        }
+
+        private void DisconnectedNetworkAlertICO()
+        {
+            _NotifyIC.Icon = Properties.Resources.ICONetworkError;
+        }
+
+        private void SomeoneIsStreamingAlertICO(int balloonTime, string tipTitle, string tipText)
+        {
+            _NotifyIC.Icon = Properties.Resources.ICOSomeoneStreaming;
+            _NotifyIC.ShowBalloonTip(balloonTime, tipTitle, tipText, ToolTipIcon.Info);
+            
+        }
+
+        private void NoOneIsstreamingICO()
+        {
+            _NotifyIC.Icon = Properties.Resources.ICOTaskBar;
+        }
+        
+        #endregion
+
+
+        #region Private Method
+
+        private void TwitchStreamLogicSetup()
+        {
             _StreamLogic.UpdateListFromDB();
             _StreamLogic.StartCheckingForStreams();
             _StreamLogic.SomeoneIsStreamingEvent += SomeoneStreaming;
             _StreamLogic.SomeoneHasStopStreamingEvent += SomeoneStopStreaming;
-            AGS_UserControl.ListHasBeenUpdatedEvent += ListOfStreamersChanged;
-
         }
-
-        #region Private Method
 
         private void SomeoneStreaming(object sender, TwitchStreamInfo e)
         {
             _ListOfStreamers.Add(e);
-            _TaskBar.SomeoneIsStreamingAlertICO(_BalloonTimeVisiable, e.BaseStreamName, e.URL);
+            SomeoneIsStreamingAlertICO(_BalloonTimeVisiable, e.BaseStreamName, e.URL);
         }
 
         private void SomeoneStopStreaming(object sender, TwitchStreamInfo e)
         {
             _ListOfStreamers.RemoveAll(x => x.URL == e.URL);
+            if(_ListOfStreamers.Count == 0)
+            {
+                NoOneIsstreamingICO();
+            }
         }
 
         private void ListOfStreamersChanged(object sender, EventArgs e)
@@ -58,14 +117,24 @@ namespace AreGamersStreaming.AGS_Core
                     _StreamLogic.RestartCheck();
                 }
 
-                _TaskBar.NoOneIsstreamingICO();
+                NoOneIsstreamingICO();
             }
             else
             {
                 _StreamLogic.StopCheckingForStreams();
-                _TaskBar.DisconnectedNetworkAlertICO();
+                DisconnectedNetworkAlertICO();
             }
 
+        }
+
+        private void OnIconDoubleClick(object Sender, EventArgs e)
+        {
+            EventHandler handler = IconDoubleClick;
+
+            if(handler != null)
+            {
+                handler(this, e);
+            }
         }
 
         #endregion
