@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
+using IWshRuntimeLibrary;
 
 namespace AreGamersStreaming.ViewModel
 {
@@ -18,11 +19,8 @@ namespace AreGamersStreaming.ViewModel
         private string _AddStreamInput;
         private List<string> _StreamList = new List<string>();
         private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>();
-        private WindowState _AGSWindow;
         private bool _MinToStart;
-        private bool _TaskBar;
-        private Visibility _Visib;
-
+        private int _HowOftenToCheck;
         #endregion
 
         #region Events
@@ -38,6 +36,7 @@ namespace AreGamersStreaming.ViewModel
         {
             _StreamList = _Preference.AllStreamList;
             _MinToStart = _Preference.IsMinamizeAtStart;
+            _HowOftenToCheck = _Preference.HowOftenToCheck;
             _PopulateComboBox();
         }
 
@@ -96,6 +95,20 @@ namespace AreGamersStreaming.ViewModel
             set;
         }
 
+
+        public int HowOftenToCheck
+        {
+            get { return _HowOftenToCheck; }
+            set
+            {
+                if(_HowOftenToCheck != value)
+                {
+                    _Preference.HowOftenToCheck = value;
+                    _HowOftenToCheck = value;
+                }
+            }
+        }
+
         #endregion
 
         #region UI Click Events
@@ -108,6 +121,21 @@ namespace AreGamersStreaming.ViewModel
         public ICommand DelButton
         {
             get { return new DelegateCast(_TheDeleteButton); }
+        }
+
+        public ICommand CloseApp
+        {
+            get { return new DelegateCast(_ExitApp); }
+        }
+
+        public ICommand ConfigWindow
+        {
+            get { return new DelegateCast(_ConfigWindow); }
+        }
+
+        public ICommand AddOrRemoveStartup
+        {
+            get { return new DelegateCast(_StartupControl); }
         }
 
         #endregion
@@ -134,6 +162,25 @@ namespace AreGamersStreaming.ViewModel
                     MessageBox.Show("fail");
                 }
             }
+        }
+
+        private void _ExitApp()
+        {
+            Environment.Exit(0);
+        }
+
+        private void _ConfigWindow()
+        {
+            View.ConfigWin config = new View.ConfigWin();
+            config.HowOftenCheck.Value = this.HowOftenToCheck;
+            config.Show();
+            config.HowOftenCheck.ValueChanged += HowOftenCheck_ValueChanged;
+        }
+
+        void HowOftenCheck_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.HowOftenToCheck = (int)Math.Round(e.NewValue);
+            _OnHowOftenToCheckUpdatedEvent();
         }
 
         private void _AddToStreamList()
@@ -196,6 +243,27 @@ namespace AreGamersStreaming.ViewModel
                 handler(this, EventArgs.Empty);
             }
         }
+
+        private void _StartupControl()
+        {
+            if(this.IsStartBoot)
+            {
+                _AddShortcutToStartup();
+            }
+            else
+            {
+                _RemoveShortcutFromStartup();
+            }
+        }
+
+        private void _AddShortcutToStartup()
+        {
+            WshShell shell = new WshShell();
+
+        }
+
+        private void _RemoveShortcutFromStartup()
+        { }
 
         #endregion
 

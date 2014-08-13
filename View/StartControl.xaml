@@ -11,8 +11,8 @@
     <StackPanel DataContext="{Binding Source={StaticResource viewModel}}">
         <Menu Background="LightGray" Margin="0,0,0,5">
             <MenuItem Header="_File">
-                <MenuItem Header="Configs"/>
-                <MenuItem Header="Quit"/>
+                <MenuItem Header="Configs" Command="{Binding Path=ConfigWindow}"/>
+                <MenuItem Header="Quit" Command="{Binding Path=CloseApp}"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="Info"/>
@@ -27,7 +27,7 @@
             <Button x:Name="DelStream" Height="25" Width="70" Margin="10,10,0,5" HorizontalAlignment="Left" Command="{Binding Path=DelButton}" BorderBrush="#FFB9A3E3" >Del Stream</Button>
             <ComboBox x:Name="DelList" Height="25" Width="175" Margin="0,10,20,5" HorizontalAlignment="right" ItemsSource="{Binding Path=ComboBoxList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedComboBoxItem}"></ComboBox>
         </Grid>    
-            <CheckBox x:Name="BootStart" Content="Start at startup" Margin="20,10,10,10" HorizontalAlignment="Left" IsChecked="{Binding Path=IsStartBoot}" BorderBrush="#FFB9A3E3"/>
+            <CheckBox x:Name="BootStart" Content="Start at startup" Margin="20,10,10,10" HorizontalAlignment="Left" Command="{Binding Path=AddOrRemoveStartup}" IsChecked="{Binding Path=IsStartBoot}" BorderBrush="#FFB9A3E3"/>
             <CheckBox x:Name="StartMin" Content="Minamize at start" Margin="20,10,10,10" HorizontalAlignment="Left" IsChecked="{Binding Path=IsMinStart}" BorderBrush="#FFB9A3E3" />
 
     </StackPanel>

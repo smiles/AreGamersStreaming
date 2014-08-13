@@ -4,7 +4,9 @@
         xmlns:Controls="clr-namespace:AreGamersStreaming.View"
         Title="Are Gamers Streaming?" Height="300" Width="300"
         ResizeMode="CanMinimize" 
-        Background="#FF6441A5" >
+        Background="#FF6441A5" 
+        Icon="pack://siteoforigin:,,,/Resources/MainIconAGSLarge.ico"
+        UseLayoutRounding="True">
     
     <Grid>
     

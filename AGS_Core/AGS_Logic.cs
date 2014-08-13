@@ -29,7 +29,13 @@ namespace AreGamersStreaming.AGS_Core
             TwitchStreamLogicSetup();
             TaskBarSetup();
             _UserControl.ListHasBeenUpdatedEvent += ListOfStreamersChanged;
+            _UserControl.HowOftenToCheckUpdatedEvent += _HowOftenToCheckUpdatedEvent;
             _NotifyIC.DoubleClick += OnIconDoubleClick;
+        }
+
+        void _HowOftenToCheckUpdatedEvent(object sender, EventArgs e)
+        {
+            _StreamLogic.UpdateHowOftenToCheck();
         }
 
 
@@ -55,7 +61,7 @@ namespace AreGamersStreaming.AGS_Core
 
         private void DisconnectedNetworkAlertICO()
         {
-            _NotifyIC.Icon = Properties.Resources.ICONetworkError;
+            //_NotifyIC.Icon = Properties.Resources.ICONetworkError;
         }
 
         private void SomeoneIsStreamingAlertICO(int balloonTime, string tipTitle, string tipText)

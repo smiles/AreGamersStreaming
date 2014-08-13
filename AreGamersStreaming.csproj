@@ -90,9 +90,16 @@
     <Compile Include="Twitch\TwitchValidation.cs" />
     <Compile Include="ViewModel\AGS_UserControl.cs" />
     <Compile Include="ViewModel\DelegateCast.cs" />
+    <Compile Include="View\ConfigWin.xaml.cs">
+      <DependentUpon>ConfigWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StartControl.xaml.cs">
       <DependentUpon>StartControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ConfigWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,15 +149,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Mirella-Gabriele-Fantasy-Mediaeval-Poison-blue.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Mirella-Gabriele-Fantasy-Mediaeval-Poison-green.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Mirella-Gabriele-Fantasy-Mediaeval-Poison-red.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -167,9 +165,35 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Twitch_LogoURL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SomeoneStreamingAGS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BaselineAGS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MainIconAGSLarge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MainIconAGSLarge.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
