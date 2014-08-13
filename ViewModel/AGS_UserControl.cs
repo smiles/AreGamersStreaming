@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
 using IWshRuntimeLibrary;
+using System.IO;
 
 namespace AreGamersStreaming.ViewModel
 {
@@ -21,6 +22,8 @@ namespace AreGamersStreaming.ViewModel
         private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>();
         private bool _MinToStart;
         private int _HowOftenToCheck;
+        private string shortCutPathName = Environment.SpecialFolder.Startup.ToString() + "AreGamersStreaming.lnk";
+
         #endregion
 
         #region Events
@@ -259,11 +262,20 @@ namespace AreGamersStreaming.ViewModel
         private void _AddShortcutToStartup()
         {
             WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortCutPathName);
 
+            shortcut.Description = "Are Gamers Streaming Shortcut";
+            shortcut.TargetPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            shortcut.Save();
         }
 
         private void _RemoveShortcutFromStartup()
-        { }
+        {
+            if(System.IO.File.Exists(shortCutPathName))
+            {
+                System.IO.File.Delete(shortCutPathName);
+            }
+        }
 
         #endregion
 

@@ -118,25 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BaseLineAGSSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BaseLineAGSSmall.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ICOSomeoneStreaming" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SomeoneStreamingAGS.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ICOTaskBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BaselineAGS.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainIconAGS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainIconAGS.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainIconAGS1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainIconAGS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainIconAGS32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainIconAGS32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MainIconAGSLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainIconAGSLarge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainIconAGSLarge1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainIconAGSLarge.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SomeoneStreamingSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SomeoneStreamingSmall.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -63,6 +63,16 @@ namespace AreGamersStreaming.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon BaseLineAGSSmall {
+            get {
+                object obj = ResourceManager.GetObject("BaseLineAGSSmall", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon ICOSomeoneStreaming {
             get {
                 object obj = ResourceManager.GetObject("ICOSomeoneStreaming", resourceCulture);
@@ -77,36 +87,6 @@ namespace AreGamersStreaming.Properties {
             get {
                 object obj = ResourceManager.GetObject("ICOTaskBar", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon MainIconAGS {
-            get {
-                object obj = ResourceManager.GetObject("MainIconAGS", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MainIconAGS1 {
-            get {
-                object obj = ResourceManager.GetObject("MainIconAGS1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MainIconAGS32x32 {
-            get {
-                object obj = ResourceManager.GetObject("MainIconAGS32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -126,6 +106,16 @@ namespace AreGamersStreaming.Properties {
         internal static System.Drawing.Icon MainIconAGSLarge1 {
             get {
                 object obj = ResourceManager.GetObject("MainIconAGSLarge1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon SomeoneStreamingSmall {
+            get {
+                object obj = ResourceManager.GetObject("SomeoneStreamingSmall", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

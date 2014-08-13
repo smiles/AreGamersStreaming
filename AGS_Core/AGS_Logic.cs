@@ -8,6 +8,7 @@ namespace AreGamersStreaming.AGS_Core
 {
     using Twitch;
     using ViewModel;
+    using Properties;
 
     public class AGS_Logic 
     {
@@ -66,14 +67,14 @@ namespace AreGamersStreaming.AGS_Core
 
         private void SomeoneIsStreamingAlertICO(int balloonTime, string tipTitle, string tipText)
         {
-            _NotifyIC.Icon = Properties.Resources.ICOSomeoneStreaming;
+            _NotifyIC.Icon = Properties.Resources.SomeoneStreamingSmall;
             _NotifyIC.ShowBalloonTip(balloonTime, tipTitle, tipText, ToolTipIcon.Info);
             
         }
 
         private void NoOneIsstreamingICO()
         {
-            _NotifyIC.Icon = Properties.Resources.ICOTaskBar;
+            _NotifyIC.Icon = Properties.Resources.BaseLineAGSSmall;
         }
         
         #endregion
