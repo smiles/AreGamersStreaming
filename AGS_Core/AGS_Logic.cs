@@ -160,8 +160,15 @@ namespace AreGamersStreaming.AGS_Core
 
         private void TwitchStreamLogicSetup()
         {
-            _StreamLogic.NewStreamList(this.StreamList);
-            _StreamLogic.StartCheckingForStreams(this.HowOftenToCheck);
+            if (this.StreamList != null)
+            {
+                _StreamLogic.NewStreamList(this.StreamList);
+            }
+
+            if (this.HowOftenToCheck != 0)
+            {
+                _StreamLogic.StartCheckingForStreams(this.HowOftenToCheck);
+            }
             _StreamLogic.SomeoneIsStreamingEvent += SomeoneStreaming;
             _StreamLogic.SomeoneHasStopStreamingEvent += SomeoneStopStreaming;
         }
