@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AreGamersStreaming.Model
@@ -15,6 +16,13 @@ namespace AreGamersStreaming.Model
         private int _HowOftenToCheck = Settings.Default.HowOftenToCheck;
         private StringCollection _StreamCollection = Settings.Default.StreamList;
         private List<string> _StreamList = new List<string>();
+
+        #endregion
+
+        #region Public events
+
+        public event EventHandler HowOftenToCheckEvent;
+        public event EventHandler AllStreamListEvent;
 
         #endregion
 
@@ -66,6 +74,7 @@ namespace AreGamersStreaming.Model
                     _HowOftenToCheck = value;
                     Settings.Default.HowOftenToCheck = value;
                     Settings.Default.Save();
+                    OnHowOftenToCheckEvent();
                 }
             }
         }
@@ -85,12 +94,30 @@ namespace AreGamersStreaming.Model
                     collection.AddRange(value.ToArray());
                     Settings.Default.StreamList = collection;
                     Settings.Default.Save();
-                    
+                    OnAllStreamListEvent();
                 }
             }
         }
 
-       
+        protected virtual void OnHowOftenToCheckEvent()
+        {
+            EventHandler handler = HowOftenToCheckEvent;
+            
+            if(handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void OnAllStreamListEvent()
+        {
+            EventHandler handler = AllStreamListEvent;
+
+            if(handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
 
         #endregion
     }

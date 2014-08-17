@@ -46,5 +46,6 @@ namespace AreGamersStreaming
                 this.Hide();
             }
         }
+
     }
 }

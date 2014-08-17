@@ -5,10 +5,10 @@
         Visibility="{Binding Path=Visib, UpdateSourceTrigger=PropertyChanged}"
         Height="300" Width="300">
     <UserControl.Resources>
-        <ViewModel:AGS_UserControl x:Key="viewModel"/>
+        <ViewModel:AGS_UserControl x:Key="AGS"/>
     </UserControl.Resources>
     
-    <StackPanel DataContext="{Binding Source={StaticResource viewModel}}">
+    <StackPanel DataContext="{Binding Source={StaticResource AGS}}">
         <Menu Background="LightGray" Margin="0,0,0,5">
             <MenuItem Header="_File">
                 <MenuItem Header="Configs" Command="{Binding Path=ConfigWindow}"/>

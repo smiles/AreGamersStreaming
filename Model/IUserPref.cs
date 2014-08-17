@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AreGamersStreaming.Model
 {
     interface IUserPref
     {
+        event EventHandler HowOftenToCheckEvent;
+        event EventHandler AllStreamListEvent;
+
         bool IsStartAtBoot
         {
             get;

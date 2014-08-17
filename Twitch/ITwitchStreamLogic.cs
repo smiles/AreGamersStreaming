@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace AreGamersStreaming.Twitch
 {
     interface ITwitchStreamLogic
@@ -7,9 +8,8 @@ namespace AreGamersStreaming.Twitch
         void RestartCheck();
         event EventHandler<TwitchStreamInfo> SomeoneIsStreamingEvent;
         event EventHandler<TwitchStreamInfo> SomeoneHasStopStreamingEvent;
-        void StartCheckingForStreams();
+        void StartCheckingForStreams(int minutes);
         void StopCheckingForStreams();
-        void UpdateHowOftenToCheck();
-        void UpdateListFromDB();
+        void NewStreamList(List<string> newStreamList);
     }
 }

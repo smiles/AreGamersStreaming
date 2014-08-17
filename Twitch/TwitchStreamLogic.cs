@@ -14,9 +14,7 @@ namespace AreGamersStreaming.Twitch
         private List<string> _StreamList = new List<string>();
 
         private string _TwitchStreamAPI;
-        private IUserPref _Preference = new UserPref();
         private ITwitchPref _TwitchInfo = new TwitchPref();
-        private int _HowOftenToCheck;
         private bool _IsCheckingForStreams;
 
         private Timer _CheckEvery = new Timer();
@@ -42,14 +40,13 @@ namespace AreGamersStreaming.Twitch
 
         public TwitchStreamLogic()
         {
-            _HowOftenToCheck = _Preference.HowOftenToCheck;
             _TwitchStreamAPI = _TwitchInfo.TwitchAPIStream;
         }
 
-        public void StartCheckingForStreams()
+        public void StartCheckingForStreams(int minutes)
         {
             this.IsChecking = true;
-            _CheckEvery.Interval = 60000 * _HowOftenToCheck;
+            _CheckEvery.Interval = 60000 * minutes;
             _CheckEvery.Tick += CheckStreams;
             _CheckEvery.Start();
         }
@@ -68,31 +65,21 @@ namespace AreGamersStreaming.Twitch
             }
         }
 
-        public void UpdateListFromDB()
+        public void ChangeCheck(int minutes)
         {
-            ConvertListToTwitchStreams();
-            _TwitchStreamAPI = _TwitchInfo.TwitchAPI;
-        }
-
-        public void UpdateHowOftenToCheck()
-        {
-            _CheckEvery.Stop();
-            _HowOftenToCheck = _Preference.HowOftenToCheck;
-            _CheckEvery.Interval = 6000 * _HowOftenToCheck;
-            _CheckEvery.Start();
+            StopCheckingForStreams();
+            StartCheckingForStreams(minutes);
         }
 
 
         #region Private Method
 
-        private void ConvertListToTwitchStreams()
+        public void NewStreamList(List<string> newStreamList)
         {
-            IUserPref preference = new UserPref();
-            _StreamList = preference.AllStreamList;
 
             _AllStreams.Clear();
 
-            foreach(string streamList in _StreamList)
+            foreach(string streamList in newStreamList)
             {
                 _AllStreams.Add(new TwitchStream(streamList, ConvertStreamURLToAPIAddress(streamList)));
             }

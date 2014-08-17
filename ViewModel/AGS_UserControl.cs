@@ -11,25 +11,19 @@ namespace AreGamersStreaming.ViewModel
     using Smiles.MvvM.Lib;
     using AreGamersStreaming.Model;
     using AreGamersStreaming.Twitch;
+    using AGS_Core;
 
     public class AGS_UserControl : CommonBase
     {
         #region Private Variables
 
-        private IUserPref _Preference = new UserPref();
         private string _AddStreamInput;
         private List<string> _StreamList = new List<string>();
         private ObservableCollection<string> _ComboBoxList = new ObservableCollection<string>();
         private bool _MinToStart;
         private int _HowOftenToCheck;
         private string shortCutPathName = Environment.SpecialFolder.Startup.ToString() + "AreGamersStreaming.lnk";
-
-        #endregion
-
-        #region Events
-
-        public event EventHandler ListHasBeenUpdatedEvent;
-        public event EventHandler HowOftenToCheckUpdatedEvent;
+        private AGS_Logic _AGSLogic = new AGS_Logic();
 
         #endregion
 
@@ -37,9 +31,13 @@ namespace AreGamersStreaming.ViewModel
 
         public AGS_UserControl()
         {
-            _StreamList = _Preference.AllStreamList;
-            _MinToStart = _Preference.IsMinamizeAtStart;
-            _HowOftenToCheck = _Preference.HowOftenToCheck;
+            _AGSLogic.LoadPersistentData();
+            if (_AGSLogic.StreamList != null)
+            {
+                _StreamList = _AGSLogic.StreamList;
+            }
+            _MinToStart = _AGSLogic.IsMinAtStart;
+            _HowOftenToCheck = _AGSLogic.HowOftenToCheck;
             _PopulateComboBox();
         }
 
@@ -62,12 +60,12 @@ namespace AreGamersStreaming.ViewModel
 
         public bool IsStartBoot
         {
-            get { return _Preference.IsStartAtBoot; }
+            get { return _AGSLogic.IsStartAtBoot; }
             set
             {
-                if (_Preference.IsStartAtBoot != value)
+                if (_AGSLogic.IsStartAtBoot != value)
                 {
-                    _Preference.IsStartAtBoot = value;
+                    _AGSLogic.IsStartAtBoot = value;
                     RaisePropertyChanged("IsStartBoot");
                 }
             }
@@ -81,7 +79,7 @@ namespace AreGamersStreaming.ViewModel
                 if(_MinToStart != value)
                 {
                     _MinToStart = value;
-                    _Preference.IsMinamizeAtStart = value;
+                    _AGSLogic.IsMinAtStart = value;
                     RaisePropertyChanged("IsMinStart");
                 }
             }
@@ -106,7 +104,7 @@ namespace AreGamersStreaming.ViewModel
             {
                 if(_HowOftenToCheck != value)
                 {
-                    _Preference.HowOftenToCheck = value;
+                    _AGSLogic.HowOftenToCheck = value;
                     _HowOftenToCheck = value;
                 }
             }
@@ -143,12 +141,6 @@ namespace AreGamersStreaming.ViewModel
 
         #endregion
 
-        #region Public Methods
-
-        
-
-        #endregion
-
         #region Private Methods
 
         private void _TheAddButton()
@@ -158,7 +150,6 @@ namespace AreGamersStreaming.ViewModel
                 if (TwitchValidation.IsValidStream(this.AddStreamInput)) 
                 {
                     _AddToStreamList();
-                    _OnListHasBeenUpdatedEvent();
                 }
                 else
                 {
@@ -177,14 +168,8 @@ namespace AreGamersStreaming.ViewModel
             View.ConfigWin config = new View.ConfigWin();
             config.HowOftenCheck.Value = this.HowOftenToCheck;
             config.Show();
-            config.HowOftenCheck.ValueChanged += HowOftenCheck_ValueChanged;
         }
 
-        void HowOftenCheck_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            this.HowOftenToCheck = (int)Math.Round(e.NewValue);
-            _OnHowOftenToCheckUpdatedEvent();
-        }
 
         private void _AddToStreamList()
         {
@@ -194,7 +179,7 @@ namespace AreGamersStreaming.ViewModel
             }
             _ComboBoxList.Add(this.AddStreamInput);
             _StreamList.Add(this.AddStreamInput);
-            _Preference.AllStreamList = _StreamList;
+            _AGSLogic.StreamList = _StreamList;
             this.AddStreamInput = string.Empty;
         }
 
@@ -203,7 +188,6 @@ namespace AreGamersStreaming.ViewModel
             if(this.SelectedComboBoxItem != null)
             {
                 _RemoveFromStreamList();
-                _OnListHasBeenUpdatedEvent();
             }
         }
 
@@ -211,7 +195,7 @@ namespace AreGamersStreaming.ViewModel
         {
             _StreamList.Remove(this.SelectedComboBoxItem);
             _ComboBoxList.Remove(this.SelectedComboBoxItem);
-            _Preference.AllStreamList = _StreamList;
+            _AGSLogic.StreamList = _StreamList;
         }
 
         private void _PopulateComboBox()
@@ -224,26 +208,6 @@ namespace AreGamersStreaming.ViewModel
                 {
                     _ComboBoxList.Add(AllStreamURL);
                 }
-            }
-        }
-
-        private void _OnListHasBeenUpdatedEvent()
-        {
-            EventHandler handler = ListHasBeenUpdatedEvent;
-            
-            if(handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
-        private void _OnHowOftenToCheckUpdatedEvent()
-        {
-            EventHandler handler = HowOftenToCheckUpdatedEvent;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
             }
         }
 
