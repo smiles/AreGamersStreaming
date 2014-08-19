@@ -51,10 +51,10 @@ namespace AreGamersStreaming.AGS_Core
 
         public bool StartMinimize()
         {
-            return this.IsMinAtStart;
+            return _Preference.IsMinamizeAtStart;
         }
 
-#region UserPref 
+        #region UserPref 
 
         public List<string> StreamList
         {
@@ -66,6 +66,7 @@ namespace AreGamersStreaming.AGS_Core
                     _Preference.AllStreamList = value;
                     _StreamList = value;
                     _StreamLogic.NewStreamList(value);
+                    
                 }
             }
         }

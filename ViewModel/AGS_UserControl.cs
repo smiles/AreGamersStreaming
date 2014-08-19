@@ -167,7 +167,13 @@ namespace AreGamersStreaming.ViewModel
         {
             View.ConfigWin config = new View.ConfigWin();
             config.HowOftenCheck.Value = this.HowOftenToCheck;
+            config.HowOftenCheck.ValueChanged += HowOftenCheck_ValueChanged;
             config.Show();
+        }
+
+        void HowOftenCheck_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.HowOftenToCheck = (int)Math.Round(e.NewValue);
         }
 
 
