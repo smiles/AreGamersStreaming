@@ -22,5 +22,10 @@ namespace AreGamersStreaming.View
         {
             InitializeComponent();
         }
+
+        private void StackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -22,6 +22,9 @@ namespace AreGamersStreaming.AGS_Core
         private string _AGSHoverOver = "Are Gamers Streaming?";
         private string _URLinBalloon;
 
+        private ContextMenu _LeftClickMenu = new ContextMenu();
+        private ContextMenu _RightClickMenu = new ContextMenu();
+
         #region User Preference Private Variables
 
         private IUserPref _Preference = new UserPref();
@@ -33,19 +36,44 @@ namespace AreGamersStreaming.AGS_Core
         #endregion
 
         public event EventHandler IconDoubleClick;
+        private event EventHandler LeftIconClick;
 
         #region Construct
 
         public AGS_Logic()
         {
             NetworkWatch();
-            TwitchStreamLogicSetup();
-            TaskBarSetup();
-            _NotifyIC.DoubleClick += OnIconDoubleClick;
-            _NotifyIC.BalloonTipClicked += _NotifyIC_BalloonTipClicked;
+            
             
         }
 
+        void _NotifyIC_MouseClick(object sender, MouseEventArgs e)
+        {
+               if(e.Button == MouseButtons.Left)
+               {
+                   
+
+               }
+               else
+               if(e.Button == MouseButtons.Right)
+               {
+                   AddContentToLeftClickMenu();
+                   _NotifyIC.ContextMenu = _LeftClickMenu;
+               }
+        }
+
+        private void AddContentToLeftClickMenu()
+        {
+            if(_ListOfStreamers.Count != 0)
+            {
+                _LeftClickMenu.MenuItems.Clear();
+
+                foreach (TwitchStreamInfo streamInfo in _ListOfStreamers)
+                {
+                    _LeftClickMenu.MenuItems.Add(streamInfo.BaseStreamName, LeftIconClick);
+                }
+            }
+        }
 
         #endregion
 
@@ -126,7 +154,7 @@ namespace AreGamersStreaming.AGS_Core
 
         #region Taskbar
 
-        private void TaskBarSetup()
+        public void TaskBarSetup()
         {
             _NotifyIC = new NotifyIcon();
             _NotifyIC.BalloonTipTitle = _AGSTitle;
@@ -135,11 +163,15 @@ namespace AreGamersStreaming.AGS_Core
 
             NoOneIsstreamingICO();
 
+            _NotifyIC.DoubleClick += OnIconDoubleClick;
+            _NotifyIC.BalloonTipClicked += _NotifyIC_BalloonTipClicked;
+            _NotifyIC.MouseClick += _NotifyIC_MouseClick;
+
         }
 
-        private void DisconnectedNetworkAlertICO()
+        public void IconDispose()
         {
-            //_NotifyIC.Icon = Properties.Resources.ICONetworkError;
+            _NotifyIC.Dispose();
         }
 
         private void SomeoneIsStreamingAlertICO(int balloonTime, string tipTitle, string tipText)
@@ -156,10 +188,9 @@ namespace AreGamersStreaming.AGS_Core
         
         #endregion
 
-
         #region Private Method
 
-        private void TwitchStreamLogicSetup()
+        public void TwitchStreamLogicSetup()
         {
             if (this.StreamList != null)
             {
@@ -210,7 +241,6 @@ namespace AreGamersStreaming.AGS_Core
             else
             {
                 _StreamLogic.StopCheckingForStreams();
-                DisconnectedNetworkAlertICO();
             }
 
         }
@@ -229,7 +259,7 @@ namespace AreGamersStreaming.AGS_Core
 
         #region Event
 
-        void _NotifyIC_BalloonTipClicked(object sender, EventArgs e)
+        private void _NotifyIC_BalloonTipClicked(object sender, EventArgs e)
         {
             Process.Start(_URLinBalloon);
         }

@@ -34,6 +34,7 @@ namespace AreGamersStreaming
         {
             this.WindowState = System.Windows.WindowState.Normal;
             this.ShowInTaskbar = true;
+            this.Activate();
             this.Show();
         }
 
@@ -41,11 +42,39 @@ namespace AreGamersStreaming
         {
             if (Core.StartMinimize())
             {
-                this.WindowState = System.Windows.WindowState.Minimized;
-                this.ShowInTaskbar = false;
-                this.Hide();
+                MinimizeWindow();
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MinimizeWindow();
+            e.Cancel = true;
+        }
+
+        private void MinimizeWindow()
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
+            this.ShowInTaskbar = false;
+            this.Hide();
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(this.WindowState == System.Windows.WindowState.Minimized)
+            {
+                MinimizeWindow();
+            }
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Minimized)
+            {
+                MinimizeWindow();
+            }
+        }
+        
 
     }
 }

@@ -32,6 +32,8 @@ namespace AreGamersStreaming.ViewModel
         public AGS_UserControl()
         {
             _AGSLogic.LoadPersistentData();
+            _AGSLogic.TaskBarSetup();
+            _AGSLogic.TwitchStreamLogicSetup();
             if (_AGSLogic.StreamList != null)
             {
                 _StreamList = _AGSLogic.StreamList;
@@ -160,6 +162,7 @@ namespace AreGamersStreaming.ViewModel
 
         private void _ExitApp()
         {
+            _AGSLogic.IconDispose();
             Environment.Exit(0);
         }
 

@@ -89,7 +89,7 @@ namespace AreGamersStreaming.Twitch
         private string ConvertStreamURLToAPIAddress(string URL)
         {
             string streamName = URL.Substring(14, URL.Length - 14);
-            return _TwitchStreamAPI += streamName;
+            return _TwitchStreamAPI + streamName;
         }
 
         private void CheckStreams(object sender, EventArgs e)

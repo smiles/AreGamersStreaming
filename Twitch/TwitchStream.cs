@@ -9,6 +9,12 @@ namespace AreGamersStreaming.Twitch
 
         public RootObject StreamJSON;
 
+
+        #endregion
+
+        #region Private Variables
+
+
         #endregion
 
         #region Public Properties
@@ -93,7 +99,12 @@ namespace AreGamersStreaming.Twitch
 
         public class Channel
         {
-            public bool mature { get; set; }
+
+            public string mature
+            {
+                get;
+                set;
+            }
             public object abuse_reported { get; set; }
             public string status { get; set; }
             public string display_name { get; set; }

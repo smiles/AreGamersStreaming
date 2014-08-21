@@ -6,7 +6,7 @@
         ResizeMode="CanMinimize" 
         Background="#FF6441A5" 
         Icon="pack://siteoforigin:,,,/Resources/MainIconAGSLarge.ico"
-        UseLayoutRounding="True">
+        UseLayoutRounding="True" Closing="Window_Closing" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged">
     
     <Grid>
     
